@@ -1,1 +1,33 @@
-Hello world
+---
+layout: default
+title: Home
+---
+
+<div class="posts">
+    {% for post in paginator.posts %}
+    <article class="post">
+        <h1 class="post-title">
+            <a href="{{ site.baseurl }}{{ post.url }}">
+                {{ post.title }}
+            </a>
+        </h1>
+
+        <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">{{ post.date | date_to_string }}</time>
+
+        {{ post.content }}
+    </article>
+    {% endfor %}
+</div>
+
+<ul class="pager">
+    {% if paginator.next_page %}
+    <li class="previous"><a href="{{ paginator.next_page_path | prepend: site.baseurl }}"><span aria-hidden="true">&larr;</span> Older</a></li>
+    {% else %}
+    <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
+    {% endif %}
+    {% if paginator.previous_page %}
+    <li class="next"><a href="{{ paginator.previous_page_path | prepend: site.baseurl }}">Newer <span aria-hidden="true">&rarr;</span></a></li>
+    {% else %}
+    <li class="next disabled"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
+    {% endif %}
+</ul>
